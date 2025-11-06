@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title> FUMHSK Library</title>
+<style>
+  /* Global */
+  :root {
+    --primary: #0a8a3e;
+    --secondary: #00b368;
+    --light: #f6fff6;
+    --text: #063;
+    --shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    font-family: "Poppins", system-ui, sans-serif;
+    background: var(--light);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: linear-gradient(120deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.6em;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow);
+    animation: fadeInDown 1s ease;
+  }
+
+  .wrap {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+    animation: fadeInUp 1s ease;
+  }
+
+  .panel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  h2 {
+    color: var(--primary);
+    border-bottom: 2px solid #e8f8ed;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+
+  label {
+    display: block;
+    margin: 10px 0 4px;
+    font-weight: 500;
+  }
+
+  input[type=text], input[type=url], input[type=password], select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #cfead9;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-family: inherit;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 6px rgba(0, 179, 104, 0.2);
+  }
+
+  input[type=file] {
+    margin-top: 6px;
+  }
+
+  button {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background: var(--secondary);
+    transform: scale(1.03);
+  }
+
+  button.secondary {
+    background: #eee;
+    color: var(--text);
+    border: 1px solid #cfead9;
+  }
+
+  .note {
+    font-size: 13px;
+    color: #175;
+    margin-top: 6px;
+  }
+
+  .subject {
+    background: linear-gradient(90deg, #f9fff9, #ecffec);
+    border-left: 6px solid var(--primary);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 16px;
+  }
+
+  .book {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 6px 0;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.8s ease;
+  }
+
+  .book .meta {
+    max-width: 70%;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    text-align: center;
+    color: #555;
+    font-size: 13px;
+    padding: 25px 0 40px;
+  }
+
+  .credit {
+    color: var(--secondary);
+    font-weight: 700;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+<header>FUMHSK 📚Library</header>
+
+<div class="wrap">
+  <!-- Admin Panel -->
+  <div class="panel" id="adminPanel">
+    <h2>🔐 Admin — Add a Book</h2>
+
+    <label for="adminPass">Admin password</label>
+    <input id="adminPass" type="password" placeholder="Enter admin password">
+
+    <label for="category">Category / Subject</label>
+    <select id="category">
+      <option>Biology</option>
+      <option>Chemistry</option>
+      <option>Physics</option>
+      <option>Anatomy</option>
+      <option>Physiology</option>
+      <option>Pathology</option>
+      <option>Pharmacology</option>
+      <option>Microbiology</option>
+      <option>Community Medicine</option>
+      <option>Surgery</option>
+      <option>Internal Medicine</option>
+    </select>
+
+    <label for="title">Book title</label>
+    <input id="title" type="text" placeholder="e.g., Human Anatomy — Gray's Edition">
+
+    <label for="author">Author / Editor</label>
+    <input id="author" type="text" placeholder="Author name">
+
+    <label for="url">Paste Direct Download URL</label>
+    <input id="url" type="url" placeholder="https://drive.google.com/... or https://dropbox.com/...">
+
+    <div class="note">Or upload from your computer (temporary for your browser)</div>
+    <input id="file" type="file" accept=".pdf,.epub,.doc,.docx,.pptx">
+
+    <div style="margin-top:14px;">
+      <button id="addBtn">Add Book</button>
+      <button class="secondary" id="clearBtn" type="button">Clear</button>
+      <span id="msg" style="margin-left:12px;"></span>
+    </div>
+  </div>
+
+  <!-- Biology Section -->
+  <div class="panel subject" id="Biology" data-subject="Biology">
+    <h2>Biology</h2>
+    <div class="book-list">
+      <div class="book">
+        <div class="meta">
+          <strong>Cell Theory</strong>
+          <div style="font-size:13px;color:#065">Loewy & Siekevitz (1963)</div>
+        </div>
+        <div>
+          <a href="https://drive.google.com/uc?export=download&id=1HtozPDOd0PzE79wXCkPHtXDMRemE6Pio" target="_blank" rel="noopener">📥 Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="library"></div>
+
+  <footer>
+    © Kwale University Medical Library — Designed & Developed by 
+    <span class="credit">Apochi Eugene</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const ADMIN_PASSWORD = "kwale123";
+  const addBtn = document.getElementById('addBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const msg = document.getElementById('msg');
+  const library = document.getElementById('library');
+
+  function normalizeDownloadLink(url){
+    if (!url) return url;
+    try {
+      const u = new URL(url.trim());
+      const host = u.hostname.toLowerCase();
+      if (host.includes('drive.google.com')) {
+        const parts = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (parts && parts[1]) return `https://drive.google.com/uc?export=download&id=${parts[1]}`;
+        const idParam = u.searchParams.get('id');
+        if (idParam) return `https://drive.google.com/uc?export=download&id=${idParam}`;
+        return url;
+      }
+      if (host.includes('dropbox.com')) {
+        if (u.searchParams.has('dl')) {
+          u.searchParams.set('dl','1');
+          return u.toString();
+        } else {
+          return url + (url.includes('?') ? '&dl=1' : '?dl=1');
+        }
+      }
+      return url;
+    } catch(e) { return url; }
+  }
+
+  addBtn.addEventListener('click', async ()=>{
+    msg.textContent='';
+    const pass = document.getElementById('adminPass').value.trim();
+    if(pass !== ADMIN_PASSWORD){ msg.innerHTML='<span class="warn">Wrong password</span>'; return; }
+
+    const title = document.getElementById('title').value.trim();
+    const author = document.getElementById('author').value.trim();
+    const rawUrl = document.getElementById('url').value.trim();
+    const fileInput = document.getElementById('file');
+    const category = document.getElementById('category').value;
+
+    if(!title){ msg.innerHTML='<span class="warn">Enter book title</span>'; return; }
+
+    if(fileInput && fileInput.files[0]){
+      const file = fileInput.files[0];
+      const blobUrl = URL.createObjectURL(file);
+      insertBook(category, title, author, blobUrl, true);
+      msg.innerHTML='<span class="success">Book uploaded (temporary)</span>';
+      clearForm();
+      return;
+    }
+
+    if(rawUrl){
+      const normalized = normalizeDownloadLink(rawUrl);
+      insertBook(category, title, author, normalized, false);
+      msg.innerHTML='<span class="success">Book added via URL</span>';
+      clearForm();
+      return;
+    }
+
+    msg.innerHTML='<span class="warn">Provide file or URL</span>';
+  });
+
+  clearBtn.addEventListener('click', clearForm);
+  function clearForm(){ document.querySelectorAll('#title,#author,#url,#file,#adminPass').forEach(el=>el.value=''); msg.textContent=''; }
+
+  function insertBook(category, title, author, href, isBlob){
+    let container = document.querySelector(`#${CSS.escape(category)} .book-list`);
+    if(!container){
+      const newPanel=document.createElement('div');
+      newPanel.className='panel subject';
+      newPanel.id=category;
+      newPanel.setAttribute('data-subject',category);
+      newPanel.innerHTML=`<h2>${category}</h2><div class="book-list"></div>`;
+      library.appendChild(newPanel);
+      container=newPanel.querySelector('.book-list');
+    }
+    const book=document.createElement('div');
+    book.className='book';
+    book.innerHTML=`
+      <div class="meta"><strong>${title}</strong><div style="font-size:13px;color:#065">${author||''}</div></div>
+      <div><a href="${href}" ${isBlob?'download':''} target="_blank" rel="noopener">📥 Download</a></div>
+    `;
+    container.appendChild(book);
+  }
+})();
+</script>
+</body>
+</html>
